@@ -5,67 +5,227 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sorteio do Kazuma</title>
   <style>
-    :root { --navy:#030817; --panel:#071329; --panel-2:#0b1a35; --blue:#087bff; --blue-2:#1d9bff; --white:#f7faff; --muted:#9baaca; --line:#153766; --danger:#ff6681; }
+   :root {
+      --bg:#f0f0f0;
+      --bg-soft:#f7f0eb;
+      --panel:#f9f5f2;
+      --panel-strong:#fffdfb;
+      --card:#f3ece7;
+      --heading:#7c5b52;
+      --heading-strong:#5d473f;
+      --accent:#417d7b;
+      --accent-strong:#2d5e5c;
+      --gold:#e9c378;
+      --gold-strong:#d9ac56;
+      --text:#545662;
+      --muted:#7a7e8b;
+      --line:rgba(124,91,82,.18);
+      --shadow:rgba(84,86,98,.14);
+      --danger:#b66861;
+      --white:#fffdfb;
+    }
     * { box-sizing:border-box; }
     html { scroll-behavior:smooth; }
-    body { margin:0; min-height:100vh; color:var(--white); background:radial-gradient(circle at 50% -15%,#0b2250 0,#030817 42%,#020511 100%); font-family:Arial,Helvetica,sans-serif; }
-    button,input { font:inherit; }
-    button { cursor:pointer; }
-    .site-header { border-bottom:1px solid rgba(32,82,145,.35); background:rgba(3,8,23,.88); }
-    .header-inner { width:min(1140px,calc(100% - 32px)); margin:auto; min-height:78px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
-    .brand { display:flex; align-items:center; gap:10px; color:var(--white); text-decoration:none; font-weight:800; line-height:1; }
-    .brand-mark { width:42px; height:42px; display:grid; place-items:center; border-radius:11px; color:white; background:linear-gradient(145deg,#159bff,#0754e8); box-shadow:0 0 24px rgba(0,123,255,.4); }
-    .brand-name span { display:block; }
-    .brand-name span:last-child { color:#168aff; }
-    nav { display:flex; align-items:center; gap:30px; }
-    nav a { color:#d9e2f7; text-decoration:none; font-size:15px; padding:29px 0; border-bottom:2px solid transparent; }
-    nav a:hover, nav a.active { color:#1b91ff; border-color:#168aff; }
-    .login { display:flex; align-items:center; gap:8px; border:0; border-radius:10px; padding:13px 20px; color:white; background:#086bf0; font-weight:700; }
-    .login:hover,.primary:hover { filter:brightness(1.12); }
-    .main { width:min(1140px,calc(100% - 32px)); margin:auto; margin-top:10px; }
-    .section { padding:78px 0; }
-    .section-heading { text-align:center; margin-bottom:42px; }
-    .kicker { color:#1594ff; font-size:40px; font-weight:800; letter-spacing:2px; text-transform:uppercase; }
+    body {
+      margin:0; 
+      min-height:100vh;
+      color:var(--text);
+      background:linear-gradient(180deg, #f0f0f0 0%, #f7efe9 27%, #eef3f2 100%);
+      font-family:Arial,Helvetica,sans-serif;
+    }
+    .site-header {
+    border-bottom:1px solid rgba(32,82,145,.35); 
+    background:rgba(255,255,255,.72); 
+    }
+    .header-inner { width:min(1140px,calc(100% - 32px)); 
+      margin:auto; 
+      min-height:78px; 
+      display:flex; 
+      align-items:center; 
+      justify-content:space-between; 
+      gap:24px; 
+    }
+    .brand { 
+      display:flex; 
+      align-items:center; 
+      gap:10px; 
+      color:var(--white); 
+      text-decoration:none; 
+      font-weight:800; 
+      line-height:1; 
+     }
+    .brand img {
+      width:92px;
+      height:auto;
+      display:block;
+      filter:drop-shadow(0 10px 18px rgba(124,91,82,.12));
+     }
+
+    .brand-name span { 
+      display:block; 
+    }
+    .brand-name {
+      font-size:clamp(18px,1.9vw,31px);
+      letter-spacing:-0.04em;
+      color:var(--heading);
+    } 
+    .brand-name span:last-child { 
+      color:var(--accent); 
+    }
+    nav { 
+      display:flex; 
+      align-items:center; 
+      gap:30px; 
+    }
+    nav a { 
+      color:var(--text); 
+      text-decoration:none; 
+      font-size:15px; 
+      padding:29px 0; 
+      border-bottom:2px 
+      solid transparent; 
+    }
+    nav a:hover, nav a.active { 
+      color:var(--heading); 
+      border-color:var(--gold); 
+    }
+    .login { display:flex; 
+      align-items:center; gap:8px; 
+      border:0; border-radius:10px; 
+      padding:13px 20px; 
+      color:var(--heading-strong); 
+      background:linear-gradient(135deg,var(--gold),#d9b66d); 
+      font-weight:700; 
+      box-shadow:0 10px 20px rgba(233,195,120,.22); 
+    }
+    .login:hover,.primary:hover { 
+      filter:brightness(1.12); 
+    }
+    .main { width:min(1140px,calc(100% - 32px)); 
+      margin:auto; 
+      margin-top:10px; 
+    }
+    .section { 
+      padding:78px 0; 
+    }
+    .section-heading {
+      text-align:center;
+      margin-bottom:42px;
+      padding:28px 12px 12px;
+    }
+    .kicker {
+      color:var(--accent);
+      font-size:clamp(40px,5vw,90px);
+      font-weight:800;
+      letter-spacing:-0.05em;
+      text-transform:uppercase;
+      line-height:0.96;
+    }
     h1,h2,h3,p { margin:0; }
     h1 { font-size:clamp(34px,5vw,58px); line-height:1.08; letter-spacing:-1.5px; }
-    h2 { font-size:clamp(28px,4vw,42px); }
-    .subheading { margin-top:12px; color:white; line-height:1.70; }
+    h2 { font-size:clamp(28px,4vw,42px); color:var(--heading-strong); }
+    .subheading {
+      margin-top:12px;
+      color:var(--text);
+      line-height:1.70;
+      font-size:clamp(18px,2vw,20px);
+      font-weight:500;
+    }
+
     .steps { display:grid; grid-template-columns:repeat(4,1fr); gap:28px; }
     .step { position:relative; text-align:center; }
-    .step-icon { width:88px; height:88px; margin:auto; display:grid; place-items:center; border:1px solid #1454a0; border-radius:20px; color:#1494ff; background:rgba(8,86,180,.15); box-shadow:inset 0 0 25px rgba(9,116,255,.12); }
+    .step-icon { width:88px; height:88px; margin:auto; display:grid; place-items:center; border:1px solid rgba(65,125,123,.25); border-radius:20px; color:var(--accent); background:rgba(65,125,123,.08); box-shadow:inset 0 0 25px rgba(65,125,123,.06); }
     .step-icon svg { width:38px; height:38px; fill:none; stroke:currentColor; stroke-width:1.8; }
-    .step-title { margin-top:18px; display:flex; align-items:center; justify-content:center; gap:9px; font-weight:700; }
-    .step-number { width:27px; height:27px; display:grid; place-items:center; border-radius:50%; color:white; background:#096cf1; font-size:13px; }
+    .step-title { margin-top:18px; display:flex; align-items:center; justify-content:center; gap:9px; font-weight:700; color:var(--heading-strong); }
+    .step-number { width:27px; height:27px; display:grid; place-items:center; border-radius:50%; color:var(--white); background:linear-gradient(135deg,var(--accent),var(--heading)); font-size:13px; }
     .step p { margin-top:10px; color:var(--muted); font-size:14px; line-height:1.6; }
     .sort-wrap { padding-bottom:84px; }
-    .sort-panel { border:1px solid #417d7b; border-radius:22px; padding:28px; background:linear-gradient(145deg,rgba(10,29,61,.92),rgba(4,12,29,.92)); box-shadow:0 25px 80px rgba(0,0,0,.25); }
+    .sort-panel {
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:28px;
+      background:linear-gradient(145deg, rgba(255,255,255,.9), rgba(243,236,231,.92));
+      box-shadow:0 26px 70px var(--shadow);
+    }
     .sort-head { display:flex; align-items:flex-start; justify-content:space-between; gap:20px; }
     .sort-head h2 { font-size:27px; }
-    .count { display:flex; align-items:center; gap:8px; padding:8px 13px; border-radius:99px; color:#4aaeff; background:rgba(8,123,255,.13); font-size:13px; font-weight:700; white-space:nowrap; }
+    .count { display:flex; align-items:center; gap:8px; padding:8px 13px; border-radius:99px; color:var(--accent-strong); background:rgba(65,125,123,.12); font-size:13px; font-weight:700; white-space:nowrap; }
     .form-row { display:flex; gap:10px; margin-top:25px; }
-    .form-row input { min-width:0; flex:1; border:1px solid #20518d; border-radius:11px; padding:14px 16px; color:white; background:#030a1b; outline:none; }
-    .form-row input:focus { border-color:#1594ff; box-shadow:0 0 0 3px rgba(8,123,255,.15); }
-    .add { width:50px; border:0; border-radius:11px; color:white; background:#087bff; font-size:26px; }
+    .form-row input {
+      min-width:0;
+      flex:1;
+      border:1px solid rgba(124,91,82,.25);
+      border-radius:11px;
+      padding:14px 16px;
+      color:var(--text);
+      background:var(--panel-strong);
+      outline:none;
+      box-shadow:inset 0 1px 3px rgba(84,86,98,.04);
+    }
+    .form-row input:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(65,125,123,.12); }
+    .add {
+      width:50px;
+      border:0;
+      border-radius:11px;
+      color:var(--heading-strong);
+      background:linear-gradient(135deg,var(--gold),var(--gold-strong));
+      font-size:26px;
+      box-shadow:0 12px 25px rgba(233,195,120,.22);
+    }
     .error { min-height:20px; margin-top:10px; color:var(--danger); font-size:13px; font-weight:700; }
     .columns { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:10px; }
-    .list-panel { min-height:245px; border:1px solid #194274; border-radius:16px; padding:18px; background:rgba(2,8,22,.6); }
-    .list-panel.winner { border-color:#087bff; background:rgba(8,91,187,.13); }
-    .list-panel h3 { text-align:center; font-size:21px; margin-bottom:16px; }
+    .list-panel {
+      min-height:245px;
+      border:1px solid rgba(124,91,82,.18);
+      border-radius:16px;
+      padding:18px;
+      background:rgba(255,255,255,.5);
+    }
+    .list-panel.winner { border-color:rgba(65,125,123,.7); background:rgba(65,125,123,.06); }
+    .list-panel h3 { text-align:center; font-size:21px; margin-bottom:16px; color:var(--heading); }
     ol { display:grid; gap:9px; margin:0; padding:0; list-style:none; }
-    li { display:flex; justify-content:space-between; align-items:center; gap:10px; border:1px solid #173962; border-radius:10px; padding:11px 12px; background:#091831; }
-    .person { display:flex; align-items:center; gap:10px; min-width:0; font-weight:700; }
-    .index { width:27px; height:27px; flex:none; display:grid; place-items:center; border-radius:50%; color:#52b2ff; background:rgba(8,123,255,.15); font-size:12px; }
-    .remove { border:0; color:#6e83a7; background:transparent; font-size:19px; }
+    li {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      border:1px solid rgba(124,91,82,.12);
+      border-radius:10px;
+      padding:11px 12px;
+      background:rgba(255,255,255,.72);
+    }
+    .person { display:flex; align-items:center; gap:10px; min-width:0; font-weight:700; color:var(--text); }
+    .index {
+      width:27px;
+      height:27px;
+      flex:none;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      color:var(--white);
+      background:linear-gradient(135deg,var(--accent),var(--heading));
+      font-size:12px;
+    }
+    .remove { border:0; color:var(--muted); background:transparent; font-size:19px; }
     .remove:hover { color:var(--danger); }
-    .empty { min-height:175px; display:grid; place-items:center; color:var(--muted); text-align:center; font-size:14px; }
+    .empty { min-height:175px; display:grid; place-items:center; color:var(--muted); text-align:center; font-size:14px;  font-weight: bold;}
     .actions { display:flex; gap:11px; margin-top:22px; }
     .primary,.secondary { display:flex; flex:1; align-items:center; justify-content:center; gap:9px; border-radius:11px; padding:14px 18px; font-weight:800; }
-    .primary { border:0; color:white; background:#417d7b; }
-    .secondary { border:1px solid #2b65a7; color:white; background:transparent; }
-    .secondary:hover { background:rgba(8,123,255,.1); }
+    .primary {
+      border:0;
+      color:var(--white);
+      background:linear-gradient(135deg,var(--accent),var(--accent-strong));
+      box-shadow:0 16px 30px rgba(65,125,123,.22);
+    }
+    .secondary {
+      border:1px solid rgba(124,91,82,.35);
+      color:var(--heading-strong);
+      background:rgba(255,255,255,.45);
+    }
+    .secondary:hover { background:rgba(124,91,82,.04); }
     button:disabled { cursor:not-allowed; }
-    .footer { border-top:1px solid rgba(32,82,145,.35); padding:25px 16px; color:var(--muted); text-align:center; font-size:13px; }
-    .footer strong { color:#168aff; }
+    .footer { border-top:1px solid var(--line); padding:25px 16px; color:var(--heading); font-weight: 800; text-align:center; background: rgba(255, 255, 255, .72); border-top: 1px solid rgba(32, 82, 145, .35);}
+    .footer strong { font-weight: 800; color: var(--accent);}
     @media (max-width:800px) { nav { display:none; } .steps { grid-template-columns:repeat(2,1fr); } }
     @media (max-width:560px) { .header-inner { min-height:70px; } .brand-name { font-size:14px; } .login { padding:11px 13px; } .section { padding:55px 0; } .steps,.columns { grid-template-columns:1fr; } .sort-panel { padding:18px; } .sort-head { flex-direction:column; } .form-row,.actions { flex-direction:column; } .add { width:100%; height:48px; } }
   </style>
@@ -89,7 +249,7 @@
         <div class="sort-head"><div><h2>Nomes participantes</h2><p class="subheading">Adicione pelo menos duas pessoas para começar.</p></div><div class="count">● <span id="contador">0 nomes</span></div></div>
         <form class="form-row" id="formulario"><label for="nome" hidden>Nome do participante</label><input id="nome" autocomplete="off" placeholder="Digite um nome..." maxlength="60"><button class="add" type="submit" aria-label="Adicionar nome">+</button></form>
         <div class="error" id="erro" role="alert"></div>
-        <div class="columns"><section class="list-panel"><h3>Nomes</h3><ol id="listaNomes"><div class="empty">Sua lista está vazia.</div></ol></section><section class="list-panel winner"><h3>Sorteados</h3><ol id="listaSorteados"><div class="empty">O resultado aparecerá aqui.</div></ol></section></div>
+        <div class="columns"><section class="list-panel"><h3>Nomes</h3><ol id="listaNomes"><div class="empty">Sua lista está vazia.</div></ol></section><section class="list-panel winner"><h3>Sorteados</h3><ol id="listaSorteados"><div class="empty">Nomes Sorteados.</div></ol></section></div>
         <div class="actions"><button class="primary" id="sortear" type="button" disabled>Sortear um nome</button><button class="secondary" id="limpar" type="button">Limpar lista</button></div>
       </div>
     </section>
